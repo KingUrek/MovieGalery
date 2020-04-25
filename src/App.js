@@ -1,26 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import movies from './data';
+import Header from './components/Header';
+import MovieList from './components/MovieList';
+import FilmeForms from './components/FilmeForms';
+import ReactDOM from 'react-dom'
+import MovieCard from './components/MovieCard';
 
 function App() {
+  let filmes = [...movies]
+
+  function rerender(object) {
+    filmes.push(object)
+
+
+    ReactDOM.render(
+      filmes.map((film) => <MovieCard movie={film} key={film.title} />),
+      document.querySelector('.movie-list')
+    );
+
+  }
+
+
+  // render() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <MovieList movies={filmes} />
+      <FilmeForms function={rerender} />
+
     </div>
   );
+  // }
 }
 
 export default App;
