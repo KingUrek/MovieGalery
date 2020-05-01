@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
 import SearchBar from './SearchBar';
 import MovieList from './MovieList';
 import AddMovie from './AddMovie';
@@ -17,6 +18,7 @@ export default class MovieLibrary extends Component {
       modal: true,
     };
     this.addMovie = this.addMovie.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   filterMovies() {
@@ -41,6 +43,11 @@ export default class MovieLibrary extends Component {
     this.setState({ movies: [...movies, obj] });
   }
 
+  closeModal() {
+    console.log('fechou o modal');
+    this.setState({ modal: false });
+  }
+
   render() {
     const { searchText, bookmarkedOnly, selectedGenre, modal } = this.state;
     return (
@@ -58,9 +65,12 @@ export default class MovieLibrary extends Component {
           open={modal}
           onClose={() => this.setState({ modal: false })}
         >
-          <AddMovie onClick={this.addMovie} />
+          <AddMovie onClick={this.addMovie} modalClose={this.closeModal} />
 
         </Modal>
+        <Button style={{ marginLeft: '20px' }} variant="contained" color="primary" onClick={() => this.setState({ modal: true })}>
+          Create New Card
+        </Button>
 
 
       </div>

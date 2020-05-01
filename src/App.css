@@ -61,8 +61,11 @@ body {
 }
 
 .movie-card-storyline {
+  
   font-size: 14px;
   text-align: justify;
+  overflow: hidden;
+  height: 104px;
 }
 
 .rating {
@@ -81,3 +84,4 @@ body {
   justify-content: flex-end;
   padding: 12px 20px;
 }
+
